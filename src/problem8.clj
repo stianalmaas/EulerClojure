@@ -22,10 +22,18 @@
   "05886116467109405077541002256983155200055935729725"
   "71636269561882670428252483600823257530420752963450"))
 
-(defn process-string [streng]
-  (loop [i 0]
-    (cond
-      (< i (- (.length streng) 5)) (recur (inc i))
-      :else (println "ferdig"))))
 
+(defn lag-int [tegn]
+  (- (int tegn) 48))
+
+(def tall (map lag-int (seq streng)))
+
+(defn find-max-prod [seed coll]
+  (let [prod (apply * (take 5 coll))
+        storre (max prod seed)]
+    (if (empty? coll)
+      storre
+      (recur storre (rest coll)))))
+
+(find-max-prod 0 tall)
 
